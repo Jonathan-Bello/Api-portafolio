@@ -1,6 +1,8 @@
 package author
 
-import "github.com/Jonathan-Bello/Api-portafolio/pkg"
+import (
+	"github.com/Jonathan-Bello/Api-portafolio/pkg"
+)
 
 type Model struct {
 	pkg.GlobalModel `gorm:"embedded"`

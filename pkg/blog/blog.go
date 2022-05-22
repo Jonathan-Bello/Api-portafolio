@@ -17,6 +17,8 @@ type Model struct {
 	Authors         []author.Model `gorm:"many2many:blog_authors" json:"authors"`
 }
 
+type Blogs []Model
+
 func (m *Model) TableName() string {
 	return "blogs"
 }
