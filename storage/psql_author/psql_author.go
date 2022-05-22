@@ -4,14 +4,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/Jonathan-Bello/Api-portafolio/pkg/author"
+	"github.com/Jonathan-Bello/Api-portafolio/models"
 	"github.com/Jonathan-Bello/Api-portafolio/storage"
 	"gorm.io/gorm"
 )
 
 // Create create a new author in database
-func Create() error {
-	res := storage.DB().Create(&author.Model{})
+func Create(author models.Author) error {
+	res := storage.DB().Create(&author)
 
 	if res.Error != nil {
 		return fmt.Errorf("can't create author in database: %v", res.Error)
@@ -21,8 +21,8 @@ func Create() error {
 }
 
 // GetAll get all authors from database
-func GetAll() (author.Authors, error) {
-	var authors author.Authors
+func GetAll() (models.Authors, error) {
+	var authors models.Authors
 
 	res := storage.DB().Find(&authors)
 
@@ -34,8 +34,8 @@ func GetAll() (author.Authors, error) {
 }
 
 // GetByID get author by id from database
-func GetByID(id uint) (author.Model, error) {
-	author := author.Model{}
+func GetByID(id uint) (models.Author, error) {
+	author := models.Author{}
 	res := storage.DB().First(&author, id)
 
 	if errors.Is(res.Error, gorm.ErrRecordNotFound) {
@@ -50,8 +50,8 @@ func GetByID(id uint) (author.Model, error) {
 }
 
 // Update update author in database
-func Update(a author.Model) error {
-	authorCondition := author.Model{}
+func Update(a models.Author) error {
+	authorCondition := models.Author{}
 	authorCondition.ID = a.ID
 	res := storage.DB().Model(&authorCondition).Updates(a)
 
@@ -68,7 +68,7 @@ func Update(a author.Model) error {
 
 // Delete delete author from database
 func Delete(id uint) error {
-	res := storage.DB().Delete(author.Model{}, id)
+	res := storage.DB().Delete(models.Author{}, id)
 
 	if res.Error != nil {
 		return fmt.Errorf("can't delete author from database: %v", res.Error)

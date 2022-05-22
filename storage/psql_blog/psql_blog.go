@@ -3,13 +3,13 @@ package psqlblog
 import (
 	"fmt"
 
-	"github.com/Jonathan-Bello/Api-portafolio/pkg/blog"
+	"github.com/Jonathan-Bello/Api-portafolio/models"
 	"github.com/Jonathan-Bello/Api-portafolio/storage"
 )
 
 // Create create a new blog in database
-func Create() error {
-	res := storage.DB().Create(&blog.Model{})
+func Create(blog models.Blog) error {
+	res := storage.DB().Create(&blog)
 
 	if res.Error != nil {
 		return fmt.Errorf("can't create blog in database: %v", res.Error)
@@ -19,8 +19,8 @@ func Create() error {
 }
 
 // GetAll get all blogs from database
-func GetAll() (blog.Blogs, error) {
-	var blogs blog.Blogs
+func GetAll() (models.Blogs, error) {
+	var blogs models.Blogs
 
 	res := storage.DB().Preload("Techs").Preload("Authors").Find(&blogs)
 

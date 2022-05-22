@@ -1,19 +1,15 @@
-package author
+package models
 
-import (
-	"github.com/Jonathan-Bello/Api-portafolio/pkg"
-)
-
-type Model struct {
-	pkg.GlobalModel `gorm:"embedded"`
+type Author struct {
+	GlobalModel `gorm:"embedded"`
 	FirstName       string  `gorm:"type:varchar(50);not null" json:"first_name"`
 	LastName        string  `gorm:"type:varchar(50);not null" json:"last_name"`
 	Email           string  `gorm:"type:varchar(50);not null" json:"email"`
 	Image           *string `gorm:"type:varchar(256);not null" json:"image"`
 }
 
-type Authors []Model
+type Authors []Author
 
-func (m *Model) TableName() string {
+func (m *Author) TableName() string {
 	return "authors"
 }

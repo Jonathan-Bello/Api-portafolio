@@ -4,14 +4,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/Jonathan-Bello/Api-portafolio/pkg/tech"
+	"github.com/Jonathan-Bello/Api-portafolio/models"
 	"github.com/Jonathan-Bello/Api-portafolio/storage"
 	"gorm.io/gorm"
 )
 
 // Create create a new tech in database
-func Create() error {
-	res := storage.DB().Create(&tech.Model{})
+func Create(tech models.Tech) error {
+	res := storage.DB().Create(&tech)
 
 	if res.Error != nil {
 		return fmt.Errorf("can't create tech in database: %v", res.Error)
@@ -21,8 +21,8 @@ func Create() error {
 }
 
 // GetAll get all techs from database
-func GetAll() (tech.Techs, error) {
-	var techs tech.Techs
+func GetAll() (models.Techs, error) {
+	var techs models.Techs
 
 	res := storage.DB().Find(&techs)
 
@@ -34,8 +34,8 @@ func GetAll() (tech.Techs, error) {
 }
 
 // GetByID get tech by id from database
-func GetByID(id uint) (tech.Model, error) {
-	tech := tech.Model{}
+func GetByID(id uint) (models.Tech, error) {
+	tech := models.Tech{}
 	res := storage.DB().First(&tech, id)
 
 	if errors.Is(res.Error, gorm.ErrRecordNotFound) {
@@ -50,8 +50,8 @@ func GetByID(id uint) (tech.Model, error) {
 }
 
 // Update update tech in database
-func Update(t tech.Model) error {
-	techCondition := tech.Model{}
+func Update(t models.Tech) error {
+	techCondition := models.Tech{}
 	techCondition.ID = t.ID
 	res := storage.DB().Model(&techCondition).Updates(t)
 
@@ -68,7 +68,7 @@ func Update(t tech.Model) error {
 
 // Delete delete tech from database
 func Delete(id uint) error {
-	res := storage.DB().Delete(tech.Model{}, id)
+	res := storage.DB().Delete(models.Tech{}, id)
 
 	if res.Error != nil {
 		return fmt.Errorf("can't delete tech in database: %v", res.Error)
