@@ -9,9 +9,11 @@ import (
 )
 
 // Migration creates the database tables
-func Migration() {
+func Migration() error {
 	err := db.AutoMigrate(&author.Model{}, &tech.Model{}, &blog.Model{})
 	if err != nil {
 		log.Printf("Error en la migracion: %v\n", err)
+		return err
 	}
+	return nil
 }

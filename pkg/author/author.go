@@ -11,3 +11,7 @@ type Model struct {
 }
 
 type Authors []Model
+
+func (m *Model) TableName() string {
+	return "authors"
+}

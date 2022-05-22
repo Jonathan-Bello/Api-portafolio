@@ -25,9 +25,14 @@ func main() {
 	// Database
 	driver := storage.Postgres
 	storage.New(driver)
-	storage.Migration()
+	err := storage.Migration()
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		log.Println("Migration success YEAH")
+	}
 
-	err := e.Start(":" + port)
+	err = e.Start(":" + port)
 	if err != nil {
 		log.Printf("Error en el servidor: %v\n", err)
 	}

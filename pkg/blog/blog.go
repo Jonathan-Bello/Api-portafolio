@@ -16,3 +16,7 @@ type Model struct {
 	Techs           []tech.Model   `gorm:"many2many:blog_techs" json:"techs"`
 	Authors         []author.Model `gorm:"many2many:blog_authors" json:"authors"`
 }
+
+func (m *Model) TableName() string {
+	return "blogs"
+}

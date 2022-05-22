@@ -9,3 +9,7 @@ type Model struct {
 }
 
 type Techs []Model
+
+func (m *Model) TableName() string {
+	return "techs"
+}
