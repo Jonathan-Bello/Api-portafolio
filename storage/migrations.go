@@ -8,7 +8,7 @@ import (
 
 // Migration creates the database tables
 func Migration() error {
-	err := db.AutoMigrate(&models.Author{}, &models.Tech{}, &models.Blog{})
+	err := db.AutoMigrate(&models.Author{}, &models.Tech{}, &models.Blog{}, &models.BlogAuthors{}, &models.BlogTechs{})
 	if err != nil {
 		log.Printf("Error en la migracion: %v\n", err)
 		return err
