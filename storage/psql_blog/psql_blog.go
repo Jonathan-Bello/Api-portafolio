@@ -30,3 +30,48 @@ func GetAll() (models.Blogs, error) {
 
 	return blogs, nil
 }
+
+// GetByID get blog by id from database
+func GetByID(id uint) (models.Blog, error) {
+	var blog models.Blog
+
+	res := storage.DB().Preload("Techs").Preload("Authors").First(&blog, id)
+
+	if res.Error != nil {
+		return models.Blog{}, fmt.Errorf("can't get blog from database: %v", res.Error)
+	}
+
+	return blog, nil
+}
+
+// Update update blog in database
+func Update(blog models.Blog) error {
+	blogCondition := models.Blog{}
+	blogCondition.ID = blog.ID
+	res := storage.DB().Model(&blogCondition).Updates(blog)
+
+	if res.Error != nil {
+		return fmt.Errorf("can't update blog in database: %v", res.Error)
+	}
+	if res.RowsAffected == 0 {
+		return storage.ErrNotFoundUpdate
+	}
+	return nil
+}
+
+// Delete delete blog in database
+func Delete(id uint) error {
+	blog := models.Blog{}
+	blog.ID = id
+	res := storage.DB().Delete(&blog)
+
+	if res.Error != nil {
+		return fmt.Errorf("can't delete blog in database: %v", res.Error)
+	}
+
+	if res.RowsAffected == 0 {
+		return storage.ErrNotFoundDelete
+	}
+
+	return nil
+}
