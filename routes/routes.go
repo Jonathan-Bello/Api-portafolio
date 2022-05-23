@@ -20,7 +20,7 @@ func Router(e echo.Echo) {
 // AuthorRoutes declares the routes for the author
 func AuthorRoutes(e echo.Echo) {
 	authors := e.Group("/authors")
-	authors.GET("/", author.GetAll)
+	authors.GET("", author.GetAll)
 	authors.GET("/:id", author.GetByID)
 	authors.POST("", author.Create)
 	authors.PUT("", author.Update)
@@ -30,7 +30,7 @@ func AuthorRoutes(e echo.Echo) {
 // TechRoutes declares the routes for the tech
 func TechRoutes(e echo.Echo) {
 	techs := e.Group("/techs")
-	techs.GET("/", tech.GetAll)
+	techs.GET("", tech.GetAll)
 	techs.GET("/:id", tech.GetByID)
 	techs.POST("", tech.Create)
 	techs.PUT("", tech.Update)
@@ -40,7 +40,7 @@ func TechRoutes(e echo.Echo) {
 // BlogRoutes declares the routes for the blog
 func BlogRoutes(e echo.Echo) {
 	blogs := e.Group("/blogs")
-	blogs.GET("/", blog.GetAll)
+	blogs.GET("", blog.GetAll)
 	// blogs.GET("/:id", blog.GetByID)
 	blogs.POST("", blog.Create)
 	// blogs.PUT("", blog.Update)
