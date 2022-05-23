@@ -9,6 +9,9 @@ import (
 
 // Router declares the routes for the API
 func Router(e echo.Echo) {
+	e.GET("", func(c echo.Context) error {
+		return c.String(200, "Hello, World!")
+	})
 	AuthorRoutes(e)
 	TechRoutes(e)
 	BlogRoutes(e)
