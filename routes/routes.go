@@ -41,8 +41,8 @@ func TechRoutes(e echo.Echo) {
 func BlogRoutes(e echo.Echo) {
 	blogs := e.Group("/blogs")
 	blogs.GET("", blog.GetAll)
-	// blogs.GET("/:id", blog.GetByID)
+	blogs.GET("/:id", blog.GetByID)
 	blogs.POST("", blog.Create)
-	// blogs.PUT("", blog.Update)
-	// blogs.DELETE("/:id", blog.Delete)
+	blogs.PUT("", blog.Update)
+	blogs.DELETE("/:id", blog.Delete)
 }
