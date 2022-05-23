@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/Jonathan-Bello/Api-portafolio/routes"
 	"github.com/Jonathan-Bello/Api-portafolio/storage"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -31,6 +32,9 @@ func main() {
 	} else {
 		log.Println("Migration success YEAH")
 	}
+
+	// Routes
+	routes.Router(*e)
 
 	err = e.Start(":" + port)
 	if err != nil {
