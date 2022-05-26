@@ -47,7 +47,7 @@ func GetByID(id uint) (models.Blog, error) {
 // Update update blog in database
 func Update(blog models.Blog) error {
 	// Update blogs and relations many2many with techs
-	res := storage.DB().Save(&blog)
+	res := storage.DB().Model(&blog).Updates(blog)
 
 	if res.Error != nil {
 		return fmt.Errorf("can't update blog in database: %v", res.Error)
