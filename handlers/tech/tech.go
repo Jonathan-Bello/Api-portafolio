@@ -69,7 +69,7 @@ func Create(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, res)
 	}
 
-	res := response.New(response.MsgOK, "Tech created", http.StatusCreated, tech)
+	res := response.New(response.MsgOK, "Tech created", http.StatusCreated, nil)
 	return c.JSON(http.StatusCreated, res)
 }
 
